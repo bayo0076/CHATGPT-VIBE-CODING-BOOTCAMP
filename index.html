@@ -1,16 +1,1474 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My First Website</title>
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ============================================================
+     SEO META TAGS
+     ============================================================ -->
+<title>Adebayo Olawunmi | Journalist, Business Strategist & International Trade Advisor</title>
+<meta name="description" content="Adebayo Olawunmi is a Lagos-based journalist, business development consultant, international trade advisor, NGO executive, and edtech co-founder connecting Nigerian opportunity to global partners.">
+<meta name="keywords" content="Adebayo Olawunmi, Nigerian journalist, business development consultant, international trade advisor, NGO executive Nigeria, Fovare, Bee Moore Advisory, Concerned Nation Builders Initiative, News Agency of Nigeria, Lagos consultant">
+<meta name="author" content="Adebayo Olawunmi">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph / social preview -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Adebayo Olawunmi | Journalist, Business Strategist & International Trade Advisor">
+<meta property="og:description" content="Bridging Nigeria and the world through journalism, business advisory, NGO leadership, edtech and AI-assisted product building.">
+
+<!-- ============================================================
+     FONTS
+     Fraunces  -> display serif (editorial / wire-copy authority)
+     Inter     -> body & UI sans
+     IBM Plex Mono -> eyebrow labels / dispatch codes (press-wire motif)
+     ============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* =====================================================================
+   DESIGN TOKENS
+   A press-wire / dispatch motif underlies the whole page: Adebayo's
+   15 years at the News Agency of Nigeria are the authentic signature,
+   so datelines, dispatch codes (NAN/xx) and ticker-tape rules recur
+   as structural devices rather than decoration.
+   ===================================================================== */
+:root {
+  /* Light theme */
+  --bg: #F6F7FA;
+  --bg-alt: #FFFFFF;
+  --ink: #0B1B33;
+  --ink-soft: #142850;
+  --text: #1B2432;
+  --text-muted: #5B6577;
+  --blue: #1B4F9C;
+  --blue-light: #2C5FD9;
+  --gold: #B4883B;
+  --border: #E1E5EC;
+  --shadow: 0 20px 50px -25px rgba(11,27,51,0.25);
+  --radius: 2px;
+  --max: 1180px;
+}
+
+[data-theme="dark"] {
+  --bg: #0A1220;
+  --bg-alt: #101A2C;
+  --ink: #060C18;
+  --ink-soft: #0E1B33;
+  --text: #E7EAF1;
+  --text-muted: #93A0B4;
+  --blue: #5588DD;
+  --blue-light: #6C9AF0;
+  --gold: #D9BA6E;
+  --border: #223050;
+  --shadow: 0 20px 50px -25px rgba(0,0,0,0.6);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background .35s ease, color .35s ease;
+  overflow-x: hidden;
+}
+
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+h1, h2, h3, h4 {
+  font-family: 'Fraunces', serif;
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: var(--gold);
+  display: inline-block;
+}
+
+.container {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+section { position: relative; }
+
+/* reveal-on-scroll animation base state */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* =====================================================================
+   NAVIGATION
+   ===================================================================== */
+header.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: color-mix(in srgb, var(--bg-alt) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text);
+}
+.brand span { color: var(--blue); }
+.nav-links {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+.nav-links a {
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color .2s ease;
+  white-space: nowrap;
+}
+.nav-links a:hover { color: var(--blue); }
+
+.nav-actions { display: flex; align-items: center; gap: 14px; }
+
+/* theme toggle switch */
+.theme-toggle {
+  width: 46px; height: 26px;
+  border-radius: 30px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.theme-toggle::after {
+  content: "";
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--blue);
+  transition: transform .3s ease, background .3s ease;
+}
+[data-theme="dark"] .theme-toggle::after {
+  transform: translateX(20px);
+  background: var(--gold);
+}
+
+.btn-cta-small {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: var(--radius);
+  background: var(--blue);
+  color: #fff;
+  border: 1px solid var(--blue);
+  transition: background .2s ease, transform .2s ease;
+}
+.btn-cta-small:hover { background: var(--blue-light); transform: translateY(-1px); }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 6px;
+}
+.hamburger span {
+  width: 22px; height: 2px;
+  background: var(--text);
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+/* mobile nav drawer */
+.mobile-drawer {
+  position: fixed;
+  top: 0; right: 0;
+  height: 100vh;
+  width: min(78vw, 320px);
+  background: var(--ink);
+  z-index: 1100;
+  transform: translateX(100%);
+  transition: transform .35s ease;
+  padding: 90px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+.mobile-drawer.open { transform: translateX(0); }
+.mobile-drawer a {
+  color: #EDEFF3;
+  font-family: 'Fraunces', serif;
+  font-size: 1.15rem;
+}
+.drawer-close {
+  position: absolute;
+  top: 24px; right: 24px;
+  background: none; border: none;
+  color: #EDEFF3; font-size: 1.6rem; cursor: pointer;
+}
+.drawer-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(6,10,20,0.55);
+  z-index: 1050;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s ease;
+}
+.drawer-backdrop.open { opacity: 1; pointer-events: auto; }
+
+/* =====================================================================
+   HERO — styled as a press-wire dispatch header
+   ===================================================================== */
+.hero {
+  background: linear-gradient(160deg, var(--ink) 0%, var(--ink-soft) 60%, #12305C 100%);
+  color: #F2F4F8;
+  padding: 170px 0 90px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 90px);
+  pointer-events: none;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.hero-dateline {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #C9D6EC;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-dateline .dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #4CD98A;
+  box-shadow: 0 0 0 4px rgba(76,217,138,0.18);
+}
+.hero h1 {
+  color: #fff;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  line-height: 1.06;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 500;
+}
+.hero .lede {
+  font-size: 1.08rem;
+  color: #C9D3E4;
+  max-width: 560px;
+  margin-bottom: 34px;
+}
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 24px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+}
+.btn-primary { background: var(--gold); color: #21170A; }
+.btn-primary:hover { transform: translateY(-2px); background: #C7A15A; }
+.btn-outline { border-color: rgba(255,255,255,0.35); color: #fff; }
+.btn-outline:hover { border-color: #fff; transform: translateY(-2px); }
+.btn-solid-blue { background: var(--blue); color: #fff; }
+.btn-solid-blue:hover { background: var(--blue-light); transform: translateY(-2px); }
+
+/* rotating role ticker */
+.role-ticker {
+  border-top: 1px solid rgba(255,255,255,0.16);
+  border-bottom: 1px solid rgba(255,255,255,0.16);
+  overflow: hidden;
+  padding: 12px 0;
+}
+.ticker-track {
+  display: flex;
+  gap: 46px;
+  white-space: nowrap;
+  animation: scroll-left 26s linear infinite;
+  width: max-content;
+}
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ticker-track span {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  color: #AFC0DD;
+  text-transform: uppercase;
+}
+.ticker-track span::after { content: "•"; margin-left: 46px; color: var(--gold); }
+
+/* hero card / press badge */
+.hero-card {
+  background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  padding: 30px;
+  backdrop-filter: blur(6px);
+}
+.hero-card .code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: .1em;
+  margin-bottom: 16px;
+  display: block;
+}
+.hero-stat-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-top: 20px;
+}
+.hero-stat b {
+  font-family: 'Fraunces', serif;
+  font-size: 1.9rem;
+  color: #fff;
+  display: block;
+  font-weight: 600;
+}
+.hero-stat span {
+  font-size: 0.78rem;
+  color: #B7C3DA;
+}
+.hero-card p {
+  font-size: 0.92rem;
+  color: #D3DAE8;
+}
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+}
+
+/* =====================================================================
+   SECTION HEADINGS (shared)
+   ===================================================================== */
+.section-pad { padding: 100px 0; }
+.section-head { max-width: 640px; margin-bottom: 54px; }
+.section-head h2 {
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  margin-top: 14px;
+}
+.section-head p { color: var(--text-muted); margin-top: 14px; font-size: 1rem; }
+.bg-alt { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.bg-ink {
+  background: linear-gradient(160deg, var(--ink) 0%, var(--ink-soft) 100%);
+  color: #EDF1F8;
+}
+.bg-ink .section-head p { color: #B9C4DA; }
+.bg-ink .eyebrow { color: var(--gold); }
+
+/* =====================================================================
+   ABOUT
+   ===================================================================== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 60px;
+  align-items: start;
+}
+.about-portrait {
+  aspect-ratio: 4/5;
+  border-radius: 4px;
+  background: linear-gradient(160deg, var(--ink) 0%, var(--blue) 130%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.about-portrait .initials {
+  font-family: 'Fraunces', serif;
+  font-size: 5rem;
+  color: rgba(255,255,255,0.92);
+  font-weight: 600;
+}
+.about-portrait .frame-code {
+  position: absolute;
+  bottom: 16px; left: 16px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: .08em;
+}
+.pull-quote {
+  border-left: 3px solid var(--gold);
+  padding-left: 22px;
+  margin: 28px 0;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--text);
+}
+.about-copy p { margin-bottom: 16px; color: var(--text-muted); }
+.about-roles {
+  margin-top: 30px;
+  display: grid;
+  gap: 12px;
+}
+.role-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.92rem;
+}
+.role-line b { font-weight: 600; color: var(--text); }
+.role-line span { color: var(--text-muted); text-align: right; }
+
+/* =====================================================================
+   EXPERTISE GRID
+   ===================================================================== */
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.expertise-card {
+  background: var(--bg-alt);
+  padding: 34px 30px;
+  transition: background .25s ease;
+}
+.expertise-card:hover { background: color-mix(in srgb, var(--blue) 6%, var(--bg-alt)); }
+.expertise-card .num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--gold);
+  letter-spacing: .1em;
+}
+.expertise-card h3 {
+  font-size: 1.08rem;
+  margin: 14px 0 10px;
+}
+.expertise-card p { font-size: 0.9rem; color: var(--text-muted); }
+
+@media (max-width: 860px) {
+  .expertise-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .expertise-grid { grid-template-columns: 1fr; }
+}
+
+/* =====================================================================
+   DISPATCH-STYLE FEATURE BLOCKS (Journalism / Advisory / NGO / EdTech / AI)
+   ===================================================================== */
+.dispatch {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 44px;
+  padding: 46px 0;
+  border-bottom: 1px solid var(--border);
+}
+.dispatch:last-child { border-bottom: none; }
+.dispatch-code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--blue);
+  letter-spacing: .08em;
+  line-height: 1.8;
+}
+.dispatch-code strong { display: block; color: var(--text); font-size: 0.95rem; margin-bottom: 6px; }
+.dispatch-body h3 { font-size: 1.35rem; margin-bottom: 12px; }
+.dispatch-body p { color: var(--text-muted); margin-bottom: 14px; max-width: 640px; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.tag {
+  font-size: 0.74rem;
+  font-family: 'IBM Plex Mono', monospace;
+  padding: 5px 11px;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  color: var(--text-muted);
+}
+@media (max-width: 720px) {
+  .dispatch { grid-template-columns: 1fr; gap: 14px; }
+}
+
+/* =====================================================================
+   SERVICES
+   ===================================================================== */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+.service-card {
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  padding: 30px 26px;
+  border-radius: 3px;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+  border-color: var(--blue);
+}
+.service-card h3 { font-size: 1.05rem; margin-bottom: 10px; }
+.service-card p { font-size: 0.88rem; color: var(--text-muted); }
+.service-card .icon-mark {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--blue) 12%, transparent);
+  color: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+@media (max-width: 860px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .services-grid { grid-template-columns: 1fr; } }
+
+/* =====================================================================
+   ACHIEVEMENTS (dark banner, ticker-tape numbers)
+   ===================================================================== */
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.12);
+  margin-top: 10px;
+}
+.stat-box {
+  background: transparent;
+  padding: 34px 24px;
+  text-align: left;
+}
+.stat-box b {
+  font-family: 'Fraunces', serif;
+  font-size: 2.5rem;
+  color: var(--gold);
+  display: block;
+  font-weight: 600;
+}
+.stat-box span { font-size: 0.82rem; color: #C4CFE3; }
+@media (max-width: 760px) { .stat-strip { grid-template-columns: repeat(2, 1fr); } }
+
+/* =====================================================================
+   CREDENTIALS TIMELINE
+   ===================================================================== */
+.credentials-list { display: grid; gap: 0; }
+.credential-item {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 30px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--border);
+}
+.credential-item:last-child { border-bottom: none; }
+.credential-year {
+  font-family: 'IBM Plex Mono', monospace;
+  color: var(--blue);
+  font-size: 0.9rem;
+}
+.credential-item h3 { font-size: 1.05rem; margin-bottom: 6px; }
+.credential-item p { color: var(--text-muted); font-size: 0.9rem; }
+@media (max-width: 600px) { .credential-item { grid-template-columns: 1fr; gap: 6px; } }
+
+/* =====================================================================
+   CURRENT PROJECTS
+   ===================================================================== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+.project-card {
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  padding: 28px;
+  border-radius: 3px;
+  position: relative;
+}
+.project-status {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: .08em;
+  color: #2E9A5C;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 16px;
+}
+.project-status .live-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #2E9A5C;
+}
+.project-card h3 { font-size: 1.05rem; margin-bottom: 10px; }
+.project-card p { color: var(--text-muted); font-size: 0.89rem; }
+@media (max-width: 860px) { .projects-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .projects-grid { grid-template-columns: 1fr; } }
+
+/* =====================================================================
+   CONTACT
+   ===================================================================== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+}
+.contact-info-card {
+  background: var(--ink);
+  color: #EDF1F8;
+  border-radius: 4px;
+  padding: 40px 34px;
+}
+.contact-info-card h3 { color: #fff; font-size: 1.3rem; margin-bottom: 8px; }
+.contact-info-card p { color: #B9C4DA; font-size: 0.92rem; margin-bottom: 26px; }
+.contact-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-top: 1px solid rgba(255,255,255,0.14);
+  font-size: 0.92rem;
+}
+.contact-line:last-of-type { border-bottom: 1px solid rgba(255,255,255,0.14); }
+.contact-line .lbl { color: #8FA1C4; min-width: 70px; font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; text-transform: uppercase; }
+.contact-socials { display: flex; gap: 12px; margin-top: 26px; }
+
+form.contact-form {
+  display: grid;
+  gap: 18px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  padding: 36px;
+  border-radius: 4px;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field label {
+  font-size: 0.76rem;
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.field input, .field select, .field textarea {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  padding: 12px 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.92rem;
+  border-radius: 2px;
+  outline: none;
+  transition: border-color .2s ease;
+}
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--blue); }
+.field textarea { resize: vertical; min-height: 110px; }
+.form-note { font-size: 0.78rem; color: var(--text-muted); }
+@media (max-width: 640px) { .form-row { grid-template-columns: 1fr; } .contact-grid { grid-template-columns: 1fr; } }
+
+/* form submit confirmation message */
+.form-success {
+  display: none;
+  background: color-mix(in srgb, #2E9A5C 12%, transparent);
+  border: 1px solid #2E9A5C;
+  color: #2E9A5C;
+  padding: 14px 16px;
+  border-radius: 3px;
+  font-size: 0.88rem;
+}
+.form-success.show { display: block; }
+
+/* =====================================================================
+   FOOTER
+   ===================================================================== */
+footer.site-footer {
+  background: var(--ink);
+  color: #B9C4DA;
+  padding: 56px 0 26px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+.footer-grid h4 {
+  color: #fff;
+  font-size: 0.85rem;
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.footer-grid ul li { margin-bottom: 10px; font-size: 0.9rem; }
+.footer-grid ul li a:hover { color: #fff; }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 22px;
+  font-size: 0.8rem;
+  color: #8092B4;
+}
+
+/* back to top */
+.to-top {
+  position: fixed;
+  bottom: 26px; right: 26px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  border: none;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s ease, transform .3s ease;
+  z-index: 900;
+  box-shadow: var(--shadow);
+}
+.to-top.show { opacity: 1; pointer-events: auto; }
+.to-top:hover { transform: translateY(-3px); }
+
+/* =====================================================================
+   RESPONSIVE — NAV / GRIDS
+   ===================================================================== */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .about-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .stat-strip { }
+}
+@media (max-width: 640px) {
+  .section-pad { padding: 70px 0; }
+  .hero { padding: 140px 0 60px; }
+}
+</style>
+</head>
 <body>
 
-<h1>Hi, I'm Bayo.</h1>
+<!-- =====================================================================
+     NAVIGATION
+     ===================================================================== -->
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">Adebayo <span>Olawunmi</span></a>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#expertise">Expertise</a>
+      <a href="#journalism">Journalism</a>
+      <a href="#advisory">Advisory</a>
+      <a href="#ngo">NGO</a>
+      <a href="#fovare">EdTech</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"></button>
+      <a href="#contact" class="btn-cta-small">Work With Me</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
 
-<p>Welcome to my Vibe Coding journey.</p>
+<!-- mobile drawer -->
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<nav class="mobile-drawer" id="mobileDrawer">
+  <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+  <a href="#about">About</a>
+  <a href="#expertise">Expertise</a>
+  <a href="#journalism">Journalism</a>
+  <a href="#advisory">Advisory</a>
+  <a href="#ngo">NGO</a>
+  <a href="#fovare">EdTech</a>
+  <a href="#tourism">Tourism &amp; AI</a>
+  <a href="#services">Services</a>
+  <a href="#achievements">Achievements</a>
+  <a href="#contact">Contact</a>
+</nav>
 
-<p>This is my first website.</p>
+<!-- =====================================================================
+     HERO
+     ===================================================================== -->
+<section class="hero" id="top">
+  <div class="container hero-grid">
+    <div class="reveal is-visible">
+      <div class="hero-dateline"><span class="dot"></span>LAGOS, NIGERIA — LIVE DISPATCH</div>
+      <h1>Journalism-trained.<br>Business-minded.<br><em>Built for the world.</em></h1>
+      <p class="lede">Adebayo Olawunmi is a Nigerian journalist, business development consultant, international trade advisor and NGO executive who turns credible reporting instincts into partnerships, market entry, funding and cross-border deals.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">Start a Conversation</a>
+        <a href="#" class="btn btn-outline" id="downloadCvBtn">Download CV</a>
+        <a href="https://www.linkedin.com/in/adebayo-olawunmi-1381258a/" target="_blank" rel="noopener" class="btn btn-solid-blue">Connect on LinkedIn</a>
+      </div>
+    </div>
+    <div class="reveal is-visible hero-card">
+      <span class="code">FILE // NAN-CORR-EPE-2026</span>
+      <p>15+ years turning fast-moving, complex situations — newsrooms, negotiations, cross-border deals — into clear outcomes for clients, funders and partners.</p>
+      <div class="hero-stat-row">
+        <div class="hero-stat"><b>15+</b><span>Years in journalism &amp; comms</span></div>
+        <div class="hero-stat"><b>5</b><span>LGAs served across Epe Division</span></div>
+        <div class="hero-stat"><b>6</b><span>Leadership &amp; advisory roles</span></div>
+        <div class="hero-stat"><b>3</b><span>Continents in active network</span></div>
+      </div>
+    </div>
+  </div>
 
+  <div class="role-ticker">
+    <div class="ticker-track" id="tickerTrack">
+      <!-- duplicated in JS for seamless loop -->
+      <span>PRINCIPAL CORRESPONDENT, NEWS AGENCY OF NIGERIA</span>
+      <span>CEO, BEE-MOORE ADVISORY</span>
+      <span>EXECUTIVE DIRECTOR, CONCERNED NATION BUILDERS INITIATIVE</span>
+      <span>CO-FOUNDER &amp; COUNTRY DIRECTOR NIGERIA, FOVARE</span>
+      <span>INTERNATIONAL TRADE CONSULTANT</span>
+      <span>AI &amp; VIBE CODING PRODUCT BUILDER</span>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     ABOUT ME
+     ===================================================================== -->
+<section class="section-pad" id="about">
+  <div class="container about-grid">
+    <div class="reveal">
+      <div class="about-portrait">
+        <span class="initials">AO</span>
+        <span class="frame-code">PORTRAIT // LAGOS, NG</span>
+      </div>
+    </div>
+    <div class="reveal about-copy">
+      <span class="eyebrow">About Adebayo</span>
+      <h2 style="margin-top:14px;">A newsroom-trained operator who builds real things across borders</h2>
+      <p style="margin-top:20px;">Adebayo Olawunmi has spent over fifteen years reporting for the News Agency of Nigeria, covering the stories that shape policy, business and public life across Lagos and beyond. That same discipline — verify first, communicate clearly, move fast — now drives his work as a business strategist, connecting Nigerian opportunity to international capital, education and trade.</p>
+      <p>He leads Bee-Moore Advisory, an FDI and market-entry consulting firm; co-founded and directs Concerned Nation Builders Initiative, an NGO delivering development projects across five Local Government Areas in Lagos State's Epe Division; and serves as Co-Founder and Country Director Nigeria for Fovare, an edtech platform expanding access to quality education across emerging markets.</p>
+      <p>Most recently, he has been applying AI-assisted, "vibe coding" workflows to build and validate software products quickly — pairing a journalist's instinct for what a market actually needs with a builder's bias for shipping.</p>
+      <div class="pull-quote">"Every good story and every good deal start the same way — you go where the facts are, and you don't leave until you understand them."</div>
+      <div class="about-roles">
+        <div class="role-line"><b>Principal Correspondent</b><span>News Agency of Nigeria (NAN)</span></div>
+        <div class="role-line"><b>CEO</b><span>Bee-Moore Advisory</span></div>
+        <div class="role-line"><b>Executive Director &amp; Co-Founder</b><span>Concerned Nation Builders Initiative</span></div>
+        <div class="role-line"><b>Co-Founder &amp; Country Director Nigeria</b><span>Fovare</span></div>
+        <div class="role-line"><b>International Trade Consultant</b><span>Independent Practice</span></div>
+        <div class="role-line"><b>AI &amp; Vibe Coding Product Builder</b><span>Independent Practice</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     CORE EXPERTISE
+     ===================================================================== -->
+<section class="section-pad bg-alt" id="expertise">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Core Expertise</span>
+      <h2>Six disciplines. One consistent operating standard.</h2>
+      <p>A working method built in newsrooms and tested across markets — thorough, fast, and accountable to the facts.</p>
+    </div>
+    <div class="expertise-grid reveal">
+      <div class="expertise-card">
+        <span class="num">01</span>
+        <h3>Journalism &amp; Media Relations</h3>
+        <p>Wire-standard reporting, editorial judgment and message strategy for public figures, institutions and campaigns.</p>
+      </div>
+      <div class="expertise-card">
+        <span class="num">02</span>
+        <h3>International Trade &amp; Market Entry</h3>
+        <p>FDI facilitation, market-entry strategy and cross-border deal structuring across Nigeria, the US, UK and Spain.</p>
+      </div>
+      <div class="expertise-card">
+        <span class="num">03</span>
+        <h3>NGO Leadership &amp; Development</h3>
+        <p>Grant strategy, community development delivery and multi-LGA program management for measurable local impact.</p>
+      </div>
+      <div class="expertise-card">
+        <span class="num">04</span>
+        <h3>EdTech &amp; Partnerships</h3>
+        <p>Nigerian market strategy, institutional partnerships and growth for cross-border education platforms.</p>
+      </div>
+      <div class="expertise-card">
+        <span class="num">05</span>
+        <h3>AI-Assisted Product Building</h3>
+        <p>Rapid MVP validation using modern AI and "vibe coding" workflows to test and ship software products quickly.</p>
+      </div>
+      <div class="expertise-card">
+        <span class="num">06</span>
+        <h3>Cross-Border Business Development</h3>
+        <p>Connecting international investors, tourists and institutions to credible, vetted Nigerian opportunity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     JOURNALISM & MEDIA
+     ===================================================================== -->
+<section class="section-pad" id="journalism">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Journalism &amp; Media</span>
+      <h2>Fifteen years of wire-standard reporting</h2>
+    </div>
+    <div class="dispatch reveal">
+      <div class="dispatch-code"><strong>NAN / LAG / 01</strong>PRINCIPAL<br>CORRESPONDENT</div>
+      <div class="dispatch-body">
+        <h3>News Agency of Nigeria — Principal Correspondent</h3>
+        <p>Adebayo has spent over fifteen years reporting for Nigeria's national wire service, producing accurate, timely coverage of politics, business, and public affairs distributed to newsrooms nationwide. That grounding in verification and deadline discipline now underwrites every advisory, campaign and partnership he leads.</p>
+        <div class="tag-row">
+          <span class="tag">Political &amp; Business Reporting</span>
+          <span class="tag">Wire-Standard Editorial Judgment</span>
+          <span class="tag">Public Affairs Coverage</span>
+        </div>
+      </div>
+    </div>
+    <div class="dispatch reveal">
+      <div class="dispatch-code"><strong>PCAN / MC / 02</strong>MEDIA &amp;<br>COMMS CONSULTING</div>
+      <div class="dispatch-body">
+        <h3>Media &amp; Communications Consulting</h3>
+        <p>Beyond the newsroom, Adebayo advises public figures, political campaigns and institutions on message strategy, press correspondence and media positioning — including senatorial-level campaign communications and press-ready editorial materials.</p>
+        <div class="tag-row">
+          <span class="tag">Campaign Communications</span>
+          <span class="tag">Press Releases &amp; Letterhead Correspondence</span>
+          <span class="tag">Media Training &amp; Positioning</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     BUSINESS ADVISORY & INTERNATIONAL TRADE
+     ===================================================================== -->
+<section class="section-pad bg-alt" id="advisory">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Business Advisory &amp; International Trade</span>
+      <h2>Bee-Moore Advisory</h2>
+      <p>An FDI and market-entry consulting firm connecting international capital and enterprise to Nigerian opportunity.</p>
+    </div>
+    <div class="dispatch reveal">
+      <div class="dispatch-code"><strong>BMA / FDI / 03</strong>MARKET<br>ENTRY</div>
+      <div class="dispatch-body">
+        <h3>FDI &amp; Market-Entry Advisory</h3>
+        <p>As CEO of Bee-Moore Advisory, Adebayo works with international businesses and investors to navigate Nigerian market entry — from regulatory landscape and local partnerships to on-the-ground due diligence. The firm holds an active relationship with the Lagos State Ministry of Youth and Social Development dating to 2024.</p>
+        <div class="tag-row">
+          <span class="tag">Foreign Direct Investment</span>
+          <span class="tag">Regulatory &amp; Government Relations</span>
+          <span class="tag">Local Partner Sourcing</span>
+        </div>
+      </div>
+    </div>
+    <div class="dispatch reveal">
+      <div class="dispatch-code"><strong>ITC / NET / 04</strong>GLOBAL<br>NETWORK</div>
+      <div class="dispatch-body">
+        <h3>International Trade Consulting</h3>
+        <p>A UCLA-trained trade background combines with an active international network across the United States, United Kingdom and Spain to support import/export strategy, cross-border partnership structuring and international business development.</p>
+        <div class="tag-row">
+          <span class="tag">US · UK · Spain Network</span>
+          <span class="tag">Import / Export Strategy</span>
+          <span class="tag">Partnership Structuring</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     NGO & COMMUNITY DEVELOPMENT
+     ===================================================================== -->
+<section class="section-pad" id="ngo">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">NGO &amp; Community Development</span>
+      <h2>Concerned Nation Builders Initiative</h2>
+      <p>A CAC-registered NGO delivering development projects across five Local Government Areas in Lagos State's Epe Division.</p>
+    </div>
+    <div class="dispatch reveal">
+      <div class="dispatch-code"><strong>CNI / EPE / 05</strong>COMMUNITY<br>DEVELOPMENT</div>
+      <div class="dispatch-body">
+        <h3>Executive Director &amp; Co-Founder</h3>
+        <p>Co-founded in 2018 with Idris Olukoya, CNI has completed over 30 projects across Epe Division, and holds recognition including an Epe Fish Festival partnership, WAPA certification and NNNGO membership. Adebayo leads the organisation's grant strategy, fundraising and cross-border CSR partnerships — including outreach to major foundations and structured campaigns for international grant funding.</p>
+        <div class="tag-row">
+          <span class="tag">30+ Completed Projects</span>
+          <span class="tag">Grant &amp; Fundraising Strategy</span>
+          <span class="tag">CSR &amp; Foundation Partnerships</span>
+          <span class="tag">Lagos State Recognition</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     EDTECH & FOVARE
+     ===================================================================== -->
+<section class="section-pad bg-alt" id="fovare">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">EdTech &amp; Fovare</span>
+      <h2>Co-Founder &amp; Country Director Nigeria, Fovare</h2>
+    </div>
+    <div class="dispatch reveal">
+      <div class="dispatch-code"><strong>FOV / NG / 06</strong>MARKET<br>STRATEGY</div>
+      <div class="dispatch-body">
+        <h3>Fovare — Expanding Access to Education Across Emerging Markets</h3>
+        <p>Fovare is an edtech platform expanding access to quality educational opportunities and resources across emerging markets. As Co-Founder and Country Director for Nigeria, Adebayo leads Nigerian market strategy, partnerships, operations and growth, working closely with co-founder Marieke van der Graaf, based in Barcelona.</p>
+        <div class="tag-row">
+          <span class="tag">Nigerian Market Strategy</span>
+          <span class="tag">Institutional Partnerships</span>
+          <span class="tag">Operations &amp; Growth</span>
+          <span class="tag">Barcelona ⇄ Lagos Collaboration</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     TOURISM, INVESTMENT & AI PROJECTS
+     ===================================================================== -->
+<section class="section-pad" id="tourism">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Tourism, Investment &amp; AI Projects</span>
+      <h2>Connecting the world to Nigerian opportunity — and building with AI</h2>
+    </div>
+    <div class="dispatch reveal">
+      <div class="dispatch-code"><strong>TIV / LOS / 07</strong>TOURISM &amp;<br>INVESTMENT</div>
+      <div class="dispatch-body">
+        <h3>Tourism &amp; Investment Facilitation</h3>
+        <p>Adebayo connects international travellers, investors and institutions to credible opportunity in Lagos and beyond — from cultural and heritage tourism sites to vetted local investment leads across trade, real estate and infrastructure.</p>
+        <div class="tag-row">
+          <span class="tag">Investor Facilitation</span>
+          <span class="tag">Heritage &amp; Cultural Tourism</span>
+          <span class="tag">Local Due Diligence</span>
+        </div>
+      </div>
+    </div>
+    <div class="dispatch reveal">
+      <div class="dispatch-code"><strong>AI / VIB / 08</strong>AI PRODUCT<br>BUILDING</div>
+      <div class="dispatch-body">
+        <h3>AI &amp; Vibe Coding Product Builder</h3>
+        <p>Applying modern AI-assisted development workflows — often described as "vibe coding" — Adebayo rapidly prototypes and validates software products, pairing a journalist's read on real-world problems with the speed of AI-native tooling.</p>
+        <div class="tag-row">
+          <span class="tag">Rapid MVP Development</span>
+          <span class="tag">AI-Native Workflows</span>
+          <span class="tag">Product Validation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     SERVICES OFFERED
+     ===================================================================== -->
+<section class="section-pad bg-alt" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Services Offered</span>
+      <h2>How organisations and individuals work with Adebayo</h2>
+      <p>Engagements are scoped to the opportunity — from a single consultation to an ongoing advisory retainer.</p>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <div class="icon-mark">M</div>
+        <h3>Media &amp; Communications Consulting</h3>
+        <p>Press strategy, campaign communications and editorial-standard writing for institutions and public figures.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon-mark">T</div>
+        <h3>International Trade Advisory</h3>
+        <p>Market-entry strategy, FDI facilitation and cross-border partnership structuring into and out of Nigeria.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon-mark">N</div>
+        <h3>NGO Partnership &amp; Grant Support</h3>
+        <p>Grant strategy, CSR partnership development and program design for community and development initiatives.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon-mark">E</div>
+        <h3>EdTech Market Entry (Africa)</h3>
+        <p>Go-to-market strategy, partnership building and operational support for education platforms entering Nigeria.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon-mark">S</div>
+        <h3>Speaking Engagements</h3>
+        <p>Panels, keynotes and workshops on journalism, cross-border business, NGO leadership and AI-assisted building.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon-mark">A</div>
+        <h3>AI Product Development Consulting</h3>
+        <p>Rapid, AI-assisted prototyping and validation for founders and teams looking to ship faster.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     FEATURED ACHIEVEMENTS
+     ===================================================================== -->
+<section class="section-pad bg-ink" id="achievements">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Featured Achievements</span>
+      <h2>A record built on delivery, not promises</h2>
+    </div>
+    <div class="stat-strip reveal">
+      <div class="stat-box"><b>15+</b><span>Years as a working journalist &amp; correspondent</span></div>
+      <div class="stat-box"><b>30+</b><span>Community development projects completed via CNI</span></div>
+      <div class="stat-box"><b>5</b><span>Local Government Areas served across Epe Division</span></div>
+      <div class="stat-box"><b>6</b><span>Concurrent leadership &amp; advisory roles</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     CREDENTIALS & EDUCATION
+     ===================================================================== -->
+<section class="section-pad" id="credentials">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Credentials &amp; Education</span>
+      <h2>Formal training behind the practice</h2>
+    </div>
+    <div class="credentials-list reveal">
+      <div class="credential-item">
+        <div class="credential-year">2018</div>
+        <div>
+          <h3>Certificate in International Trade — UCLA</h3>
+          <p>Formal training in international trade principles, underpinning current advisory and market-entry work.</p>
+        </div>
+      </div>
+      <div class="credential-item">
+        <div class="credential-year">2006</div>
+        <div>
+          <h3>BSc, Real Estate Management — University of Lagos</h3>
+          <p>Foundational grounding in property, valuation and market analysis.</p>
+        </div>
+      </div>
+      <div class="credential-item">
+        <div class="credential-year">2018</div>
+        <div>
+          <h3>Co-Founder, Concerned Nation Builders Initiative</h3>
+          <p>CAC-registered NGO co-founded with Idris Olukoya; recognised by Lagos State with WAPA certification and NNNGO membership.</p>
+        </div>
+      </div>
+      <div class="credential-item">
+        <div class="credential-year">Language</div>
+        <div>
+          <h3>Native Yoruba Speaker · Fluent English</h3>
+          <p>Full bilingual fluency supports reporting, negotiation and community engagement across Southwest Nigeria.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     CURRENT PROJECTS
+     ===================================================================== -->
+<section class="section-pad bg-alt" id="projects">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Current Projects</span>
+      <h2>What Adebayo is building right now</h2>
+    </div>
+    <div class="projects-grid reveal">
+      <div class="project-card">
+        <div class="project-status"><span class="live-dot"></span>In Progress</div>
+        <h3>Fovare Nigeria Market Expansion</h3>
+        <p>Scaling institutional partnerships, operations and growth strategy for Fovare's Nigerian market as Co-Founder and Country Director.</p>
+      </div>
+      <div class="project-card">
+        <div class="project-status"><span class="live-dot"></span>In Progress</div>
+        <h3>CNI Grant &amp; Fundraising Initiative</h3>
+        <p>An active campaign to secure international grant funding and CSR partnerships supporting community projects across Epe Division's five LGAs.</p>
+      </div>
+      <div class="project-card">
+        <div class="project-status"><span class="live-dot"></span>In Progress</div>
+        <h3>AI-Assisted Product Building</h3>
+        <p>Exploring and validating AI-powered software products at the intersection of technology and everyday problem-solving in Nigerian markets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     CONTACT
+     ===================================================================== -->
+<section class="section-pad" id="contact">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Get In Touch</span>
+      <h2>Let's talk about the opportunity</h2>
+      <p>Whether it's a partnership, a grant, a speaking invitation, a consulting engagement or a story lead — reach out directly.</p>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="contact-info-card">
+        <h3>Direct Contact</h3>
+        <p>Based in Lagos, Nigeria. Available for remote work, travel and international engagements.</p>
+        <div class="contact-line"><span class="lbl">Email</span><a href="mailto:bayo.olawunmi@gmail.com">bayo.olawunmi@gmail.com</a></div>
+        <div class="contact-line"><span class="lbl">Phone</span><a href="tel:+2349015006151">+234 901 500 6151</a></div>
+        <div class="contact-line"><span class="lbl">WhatsApp</span><a href="https://wa.me/2349015006151" target="_blank" rel="noopener">Message on WhatsApp</a></div>
+        <div class="contact-line"><span class="lbl">LinkedIn</span><a href="https://www.linkedin.com/in/adebayo-olawunmi-1381258a/" target="_blank" rel="noopener">View Profile</a></div>
+        <div class="contact-socials">
+          <a href="https://wa.me/2349015006151" target="_blank" rel="noopener" class="btn btn-solid-blue">WhatsApp</a>
+          <a href="https://www.linkedin.com/in/adebayo-olawunmi-1381258a/" target="_blank" rel="noopener" class="btn btn-outline" style="border-color:rgba(255,255,255,0.35);color:#fff;">LinkedIn</a>
+        </div>
+      </div>
+
+      <!-- Contact form: front-end only, wire up to a backend or form service as needed -->
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <div class="field">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Your full name" required>
+          </div>
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@company.com" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="opportunity">Opportunity Type</label>
+          <select id="opportunity" name="opportunity" required>
+            <option value="" disabled selected>Select an opportunity type</option>
+            <option>Consulting / Business Advisory</option>
+            <option>International Trade Partnership</option>
+            <option>NGO Partnership / Grant</option>
+            <option>EdTech / Fovare Partnership</option>
+            <option>Journalism / Media</option>
+            <option>Speaking Engagement</option>
+            <option>Remote Work / Employment</option>
+            <option>Tourism / Investment</option>
+            <option>AI Project Collaboration</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell me a little about the opportunity..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-solid-blue" style="justify-self:start;">Send Message</button>
+        <div class="form-success" id="formSuccess">Thank you — your message has been noted. Adebayo will respond directly via email or WhatsApp.</div>
+        <p class="form-note">This form is front-end only. Connect it to an email service, form backend, or serverless endpoint to receive submissions.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     FOOTER
+     ===================================================================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="color:#fff;">Adebayo <span style="color:var(--gold);">Olawunmi</span></div>
+        <p style="margin-top:14px; font-size:0.9rem; max-width:340px;">Journalist, business strategist and international trade advisor bridging Nigeria and the world — through media, advisory, NGO leadership, edtech and AI-assisted product building.</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#expertise">Core Expertise</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Current Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:bayo.olawunmi@gmail.com">bayo.olawunmi@gmail.com</a></li>
+          <li><a href="tel:+2349015006151">+234 901 500 6151</a></li>
+          <li><a href="https://wa.me/2349015006151" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://www.linkedin.com/in/adebayo-olawunmi-1381258a/" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year"></span> Adebayo Olawunmi. All rights reserved.</span>
+      <span>Lagos, Nigeria — Available Worldwide</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTopBtn" aria-label="Back to top">&uarr;</button>
+
+<script>
+/* =====================================================================
+   THEME TOGGLE (light / dark, persisted in-session)
+   ===================================================================== */
+const themeToggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+let currentTheme = 'light';
+themeToggle.addEventListener('click', () => {
+  currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+  if (currentTheme === 'dark') {
+    root.setAttribute('data-theme', 'dark');
+  } else {
+    root.removeAttribute('data-theme');
+  }
+});
+
+/* =====================================================================
+   MOBILE NAVIGATION DRAWER
+   ===================================================================== */
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const drawerClose = document.getElementById('drawerClose');
+const mobileDrawer = document.getElementById('mobileDrawer');
+const drawerBackdrop = document.getElementById('drawerBackdrop');
+
+function openDrawer() {
+  mobileDrawer.classList.add('open');
+  drawerBackdrop.classList.add('open');
+}
+function closeDrawer() {
+  mobileDrawer.classList.remove('open');
+  drawerBackdrop.classList.remove('open');
+}
+hamburgerBtn.addEventListener('click', openDrawer);
+drawerClose.addEventListener('click', closeDrawer);
+drawerBackdrop.addEventListener('click', closeDrawer);
+mobileDrawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+
+/* =====================================================================
+   ROLE TICKER — duplicate content once for a seamless infinite scroll
+   ===================================================================== */
+const tickerTrack = document.getElementById('tickerTrack');
+tickerTrack.innerHTML += tickerTrack.innerHTML;
+
+/* =====================================================================
+   SCROLL REVEAL ANIMATIONS
+   ===================================================================== */
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => observer.observe(el));
+
+/* =====================================================================
+   BACK TO TOP BUTTON
+   ===================================================================== */
+const toTopBtn = document.getElementById('toTopBtn');
+window.addEventListener('scroll', () => {
+  toTopBtn.classList.toggle('show', window.scrollY > 500);
+});
+toTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+/* =====================================================================
+   CONTACT FORM — front-end validation & confirmation
+   (Wire this up to a backend / email service / form API to go live)
+   ===================================================================== */
+const contactForm = document.getElementById('contactForm');
+const formSuccess = document.getElementById('formSuccess');
+contactForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  // Placeholder: in production, send form data to a backend endpoint here.
+  formSuccess.classList.add('show');
+  contactForm.reset();
+  setTimeout(() => formSuccess.classList.remove('show'), 6000);
+});
+
+/* =====================================================================
+   DOWNLOAD CV — placeholder handler until a CV file is attached
+   ===================================================================== */
+document.getElementById('downloadCvBtn').addEventListener('click', (e) => {
+  e.preventDefault();
+  alert('CV download coming soon — please request a copy directly via email or WhatsApp.');
+});
+
+/* =====================================================================
+   FOOTER YEAR
+   ===================================================================== */
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
